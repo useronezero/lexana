@@ -39,7 +39,7 @@ def main():
             symbolTable[symbolTableIndex] = {'symbol': inputStream[i]}
             symbolTableIndex += 1
         else:
-            print('something')
+            pass
         i += 1
     tokenPrint()
 
@@ -72,19 +72,24 @@ def digits(i, inputStream):
         if inputStream[i].isdigit():
             digit += inputStream[i]
         elif inputStream[i] == '.':
-            if inputStream[i + 1].isdigit():
-                digit += inputStream[i]
-                i += 1
-                continue
-            else:
+            try:
+                if inputStream[i + 1].isdigit():
+                    digit += inputStream[i]
+                    i += 1
+                    continue
+                else:
+                    break
+            except:
                 break
         elif inputStream[i].upper() == 'E':
-            if inputStream[i + 1] in digitsymbols and inputStream[i + 2].isdigit():
-                digit += inputStream[i] + inputStream[i + 1]
-                i += 2
-                continue
-            else:
-                break
+            try:
+                if inputStream[i + 1] in digitsymbols and inputStream[i + 2].isdigit():
+                    digit += inputStream[i] + inputStream[i + 1]
+                    i += 2
+                    continue
+                else:
+                    break
+            except: break
         else:
             break
         i += 1
@@ -101,4 +106,5 @@ def tokenPrint():
 
 
 main()
+
 ```
