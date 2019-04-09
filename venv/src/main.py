@@ -3,7 +3,7 @@ keywords = ['auto', 'break', 'case', 'char', 'const', 'continue', 'default', 'do
             'signed', 'sizeof', 'static', 'struct', 'switch', 'typedef', 'union', 'unsigned', 'void', 'volatile',
             'while']
 operators = ['+', '-', '/', '%', '++', '--', '==', '!=', '>', '<', '>=', '<=', '&&', '||', '!', '=']
-symbols = [',', ';', '(', ')','{','}']
+symbols = [',', ';', '(', ')', '{', '}']
 symbolTable = {}
 symbolTableIndex = 0
 
@@ -23,13 +23,13 @@ def main():
             i = digits(i, inputStream)
             continue
         elif inputStream[i] in operators:
-            symbolTable[symbolTableIndex] ={ 'operator' :inputStream[i]}
+            symbolTable[symbolTableIndex] = {'operator': inputStream[i]}
             symbolTableIndex += 1
         elif inputStream[i] in symbols:
-            symbolTable[symbolTableIndex] = {'symbol':inputStream[i]}
+            symbolTable[symbolTableIndex] = {'symbol': inputStream[i]}
             symbolTableIndex += 1
         else:
-            print('something')
+            pass
         i += 1
     tokenPrint()
 
@@ -45,10 +45,10 @@ def identifier(i, inputStream):
         i += 1
 
     if identifier in keywords:
-        symbolTable[symbolTableIndex] = {'keyword':identifier}
+        symbolTable[symbolTableIndex] = {'keyword': identifier}
         symbolTableIndex += 1
     else:
-        symbolTable[symbolTableIndex] = {'identifier':identifier}
+        symbolTable[symbolTableIndex] = {'identifier': identifier}
         symbolTableIndex += 1
 
     return i
@@ -62,30 +62,37 @@ def digits(i, inputStream):
         if inputStream[i].isdigit():
             digit += inputStream[i]
         elif inputStream[i] == '.':
-            if inputStream[i + 1].isdigit():
-                digit += inputStream[i]
-                i += 1
-                continue
-            else:
+            try:
+                if inputStream[i + 1].isdigit():
+                    digit += inputStream[i]
+                    i += 1
+                    continue
+                else:
+                    break
+            except:
                 break
         elif inputStream[i].upper() == 'E':
-            if inputStream[i + 1] in digitsymbols and inputStream[i + 2].isdigit():
-                digit += inputStream[i] + inputStream[i + 1]
-                i += 2
-                continue
-            else:
-                break
+            try:
+                if inputStream[i + 1] in digitsymbols and inputStream[i + 2].isdigit():
+                    digit += inputStream[i] + inputStream[i + 1]
+                    i += 2
+                    continue
+                else:
+                    break
+            except: break
         else:
             break
         i += 1
     if digit != '':
-        symbolTable[symbolTableIndex] = {'constant':digit}
+        symbolTable[symbolTableIndex] = {'constant': digit}
         symbolTableIndex += 1
     return i
 
+
 def tokenPrint():
-    for id,token in symbolTable.items() :
+    for id, token in symbolTable.items():
         for key in token:
-            print('< ',key,', '+token[key]+' >')
+            print('< ', key, ', ' + token[key] + ' >')
+
 
 main()
