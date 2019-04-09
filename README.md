@@ -1,10 +1,13 @@
 # lexical analyser.
-simple lexical analyser using python
+simple lexical analyser for c language using python
 
 Note: its a very basic impletation and does not have all the featues.
 
-here the code for those who are too lazy to :p
+here is the code for those who are too lazy to clone the repo 😝 .
+
+```
 #author: Kishore
+
 keywords = ['auto', 'break', 'case', 'char', 'const', 'continue', 'default', 'do', 'double', 'else', 'enum',
             'extern', 'float', 'for', 'goto', 'if', 'int', 'long', 'register', 'return', 'short',
             'signed', 'sizeof', 'static', 'struct', 'switch', 'typedef', 'union', 'unsigned', 'void', 'volatile',
@@ -98,3 +101,4 @@ def tokenPrint():
 
 
 main()
+```
