@@ -16,6 +16,21 @@ def main():
         if inputStream[i] == ' ' or inputStream[i] == '\t':
             i += 1
             continue
+
+        elif inputStream[i] == '/':
+            try:
+                if (inputStream[i + 1] == '/'):
+                    while inputStream[i] != '\n':
+                        i += 1
+                elif (inputStream[i + 1]) == '*':
+                    i += 2
+                    while inputStream[i] != '*' and inputStream[i + 1] != '/':
+                        i += 1
+                else:
+                    pass
+            except:
+                pass
+
         elif inputStream[i].isalpha():
             i = identifier(i, inputStream)
             continue
@@ -79,7 +94,8 @@ def digits(i, inputStream):
                     continue
                 else:
                     break
-            except: break
+            except:
+                break
         else:
             break
         i += 1
